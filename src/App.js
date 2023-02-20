@@ -10,11 +10,12 @@ import { Transactions } from './components/Transactions/Transactions';
 import Basket from './components/Basket/Basket';
 import basket from './data/data.basket.json';
 import { ContactsPage } from './components/Contacts/ContactsPage/ContactsPage';
+import { AccordionItem} from './components/AccordionItem/AccordionItem'
 
 function App() {
   return (
     <div className="App">
-      <ContactsPage />
+      {/* <ContactsPage /> */}
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
       <Statistics data={statistics} title="Main Statistics" />
@@ -22,6 +23,7 @@ function App() {
       <Forbes list={forbes} title="hello" />
       <Forbes list={forbes} />
       <Transactions items={transactions} /> */}
+      <AccordionItem />
     </div>
   );
 }
