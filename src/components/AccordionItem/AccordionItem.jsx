@@ -1,36 +1,44 @@
-import { Component } from "react";
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import pt from 'date-fns/esm/locale/pt/index.js';
 
 export class AccordionItem extends Component {
-    state = {
-        isOpen: false
-    }
+  //   state = {
+  //     isOpen: false,
+  //   };
 
-    onClick = () => {
-        this.setState((prevState) => {
-            return {
-                isOpen: !prevState.isOpen
-            }
-        })
-    }
+  //   onClick = () => {
+  //     this.setState(prevState => {
+  //       return {
+  //         isOpen: !prevState.isOpen,
+  //       };
+  //     });
+  //   };
 
-    render() {
-        return (
-            <div className="container">
-            <div className="accordion">
-            <div className="accordion-item">
-                <p className="title" onClick={this.onClick}>
-                  First Question
-                </p>
-                {this.state.isOpen && <div className="content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu interdum diam. Donec interdum porttitor risus non bibendum. Maecenas sollicitudin eros in quam imperdiet placerat. Cras justo purus, rhoncus nec lobortis ut, iaculis vel ipsum. Donec dignissim arcu nec elit faucibus condimentum. Donec facilisis consectetur enim sit amet varius. Pellentesque justo dui, sodales quis luctus a, iaculis eget mauris.
-        
-                    Aliquam dapibus, ante quis fringilla feugiat, mauris risus condimentum massa, at elementum libero quam ac ligula. Pellentesque at rhoncus dolor. Duis porttitor nibh ut lobortis aliquam. Nullam eu dolor venenatis mauris placerat tristique eget id dolor. Quisque blandit adipiscing erat vitae dapibus. Nulla aliquam magna nec elementum tincidunt.
-                  </p>
-                </div>}    
-                
+  render() {
+    const { onItemClick, isOpen, title, text } = this.props;
+    return (
+      <div className="container">
+        <div className="accordion">
+          <div className="accordion-item">
+            <p className="title" onClick={() => onItemClick(title)}>
+              {title}
+            </p>
+            {isOpen && (
+              <div className="content">
+                <p>{text}</p>
               </div>
+            )}
+          </div>
         </div>
-    </div>
-        )
-    }
+      </div>
+    );
+  }
 }
+
+AccordionItem.propTypes = {
+  onItemClick: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};

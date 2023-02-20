@@ -10,7 +10,9 @@ import { Transactions } from './components/Transactions/Transactions';
 import Basket from './components/Basket/Basket';
 import basket from './data/data.basket.json';
 import { ContactsPage } from './components/Contacts/ContactsPage/ContactsPage';
-import { AccordionItem} from './components/AccordionItem/AccordionItem'
+import { AccordionItem } from './components/AccordionItem/AccordionItem';
+import Faq from './components/FAQ/Faq';
+import dataFaq from './data/faq.json';
 
 function App() {
   return (
@@ -23,7 +25,8 @@ function App() {
       <Forbes list={forbes} title="hello" />
       <Forbes list={forbes} />
       <Transactions items={transactions} /> */}
-      <AccordionItem />
+      {/* <AccordionItem /> */}
+      <Faq data={dataFaq} />
     </div>
   );
 }
