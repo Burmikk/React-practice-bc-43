@@ -15,11 +15,11 @@ function App() {
   return (
     <div className="App">
       <ContactsPage />
-      {/* <Basket data={basket} />
-      <BlogCard {...article} />
-      <Statistics data={statistics} title="Main Statistics" /> */}
-      {/* <Statistics data={statistics} /> */}
-      {/* <Forbes list={forbes} title="hello" />
+      {/* <Basket data={basket} /> */}
+      {/* <BlogCard {...article} />
+      <Statistics data={statistics} title="Main Statistics" />
+      <Statistics data={statistics} />
+      <Forbes list={forbes} title="hello" />
       <Forbes list={forbes} />
       <Transactions items={transactions} /> */}
     </div>
