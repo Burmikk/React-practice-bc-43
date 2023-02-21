@@ -13,11 +13,12 @@ import { ContactsPage } from './components/Contacts/ContactsPage/ContactsPage';
 import { AccordionItem } from './components/AccordionItem/AccordionItem';
 import Faq from './components/FAQ/Faq';
 import dataFaq from './data/faq.json';
+import Images from './components/Images/Images';
 
 function App() {
   return (
     <div className="App">
-      <ContactsPage />
+      {/* <ContactsPage /> */}
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
       <Statistics data={statistics} title="Main Statistics" />
@@ -27,6 +28,7 @@ function App() {
       <Transactions items={transactions} /> */}
       {/* <AccordionItem /> */}
       {/* <Faq data={dataFaq} /> */}
+      <Images />
     </div>
   );
 }
