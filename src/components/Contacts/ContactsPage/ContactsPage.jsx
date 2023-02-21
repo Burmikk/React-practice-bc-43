@@ -10,6 +10,21 @@ export class ContactsPage extends Component {
     filter: '',
   };
 
+  componentDidUpdate(_, prevState) {
+    if (
+      JSON.stringify(prevState.contact) !== JSON.stringify(this.state.contact)
+    ) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contact));
+    }
+  }
+
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    if (contacts?.length > 0) {
+      this.setState({ contact: contacts });
+    }
+  }
+
   addContact = data => {
     console.log(data);
     const isDublicateNumber = this.state.contact.find(

@@ -17,7 +17,7 @@ import dataFaq from './data/faq.json';
 function App() {
   return (
     <div className="App">
-      {/* <ContactsPage /> */}
+      <ContactsPage />
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
       <Statistics data={statistics} title="Main Statistics" />
@@ -26,7 +26,7 @@ function App() {
       <Forbes list={forbes} />
       <Transactions items={transactions} /> */}
       {/* <AccordionItem /> */}
-      <Faq data={dataFaq} />
+      {/* <Faq data={dataFaq} /> */}
     </div>
   );
 }
