@@ -3,6 +3,7 @@ import { getImages } from '../../sevices/imagesAPI';
 import { Dna } from 'react-loader-spinner';
 import ImageList from './ImageList/ImageList';
 import Button from '../Button/Button';
+import Form from './Form/Form';
 
 class Images extends Component {
   state = {
@@ -10,13 +11,14 @@ class Images extends Component {
     isLoading: false,
     error: null,
     page: 1,
+    search: '',
   };
 
   async fetch() {
-    const { page } = this.state;
+    const { page, search } = this.state;
     try {
       this.setState({ isLoading: true });
-      const { data } = await getImages(page);
+      const { data } = await getImages(page, search);
       this.setState(prevState => ({
         images: [...prevState.images, ...data],
       }));
@@ -32,7 +34,8 @@ class Images extends Component {
   }
 
   componentDidUpdate(_, prevState) {
-    if (prevState.page !== this.state.page) {
+    const { search, page } = this.state;
+    if (prevState.page !== page || prevState.search !== search) {
       this.fetch();
     }
   }
@@ -43,11 +46,19 @@ class Images extends Component {
     }));
   };
 
+  handleSubmit = search => {
+    this.setState({
+      search,
+      images: [],
+      page: 1,
+    });
+  };
   render() {
     const { images, isLoading, error } = this.state;
     console.log(images);
     return (
       <>
+        <Form onSubmit={this.handleSubmit} />
         {isLoading && (
           <Dna
             visible={true}
