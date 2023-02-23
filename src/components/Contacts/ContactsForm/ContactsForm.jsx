@@ -1,66 +1,99 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 import styles from './ContactsForm.module.css';
-
 const INITIAL_STATE = {
   name: '',
   number: '',
   favorite: false,
 };
+export const ContactsForm = ({ addContact }) => {
+  const [state, setState] = useState({
+    ...INITIAL_STATE,
+  });
+  const { name, number, favorite } = state;
 
-export class ContactsForm extends Component {
-  state = { ...INITIAL_STATE };
-
-  handleChangeInput = ({ target }) => {
+  const handleChangeInput = ({ target }) => {
     const { id, value, checked, type } = target;
 
-    this.setState({
-      [id]: type === 'checkbox' ? checked : value,
+    setState(prevState => {
+      return { ...prevState, [id]: type === 'checkbox' ? checked : value };
     });
   };
 
-  handleSubmitForm = e => {
+  const handleSubmitForm = e => {
     e.preventDefault();
-    this.props.addContact({ ...this.state });
-    this.reset();
+    addContact({ ...state });
+    reset();
   };
 
-  reset() {
-    this.setState({ ...INITIAL_STATE });
-  }
+  const reset = () => {
+    setState({ ...INITIAL_STATE });
+  };
+  return (
+    <form onSubmit={handleSubmitForm}>
+      <label htmlFor="name">Name:</label>
+      <input onChange={handleChangeInput} id="name" type="text" value={name} />
+      <label htmlFor="number">Tel:</label>
+      <input
+        onChange={handleChangeInput}
+        id="number"
+        type="text"
+        value={number}
+      />
+      <label htmlFor="favorite">Add contact to favorite</label>
+      <input
+        onChange={handleChangeInput}
+        type="checkbox"
+        id="favorite"
+        name="checkbox"
+        checked={favorite}
+      />
+      <button type="submit">Add</button>
+    </form>
+  );
+};
 
-  render() {
-    const { name, number } = this.state;
+// const INITIAL_STATE = {
+//   name: '',
+//   number: '',
+//   favorite: false,
+// };
 
-    return (
-      <form onSubmit={this.handleSubmitForm}>
-        <label htmlFor="name">Name:</label>
-        <input
-          onChange={this.handleChangeInput}
-          id="name"
-          type="text"
-          value={name}
-        />
-        <label htmlFor="number">Tel:</label>
-        <input
-          onChange={this.handleChangeInput}
-          id="number"
-          type="text"
-          value={number}
-        />
-        <label htmlFor="favorite">Add contact to favorite</label>
-        <input
-          onChange={this.handleChangeInput}
-          type="checkbox"
-          id="favorite"
-          name="checkbox"
-          checked={this.state.favorite}
-        />
-        <button type="submit">Add</button>
-      </form>
-    );
-  }
-}
+// export class ContactsForm extends Component {
+//   state = { ...INITIAL_STATE };
+
+//   render() {
+//     const { name, number } = this.state;
+
+//     return (
+//       <form onSubmit={this.handleSubmitForm}>
+//         <label htmlFor="name">Name:</label>
+//         <input
+//           onChange={this.handleChangeInput}
+//           id="name"
+//           type="text"
+//           value={name}
+//         />
+//         <label htmlFor="number">Tel:</label>
+//         <input
+//           onChange={this.handleChangeInput}
+//           id="number"
+//           type="text"
+//           value={number}
+//         />
+//         <label htmlFor="favorite">Add contact to favorite</label>
+//         <input
+//           onChange={this.handleChangeInput}
+//           type="checkbox"
+//           id="favorite"
+//           name="checkbox"
+//           checked={this.state.favorite}
+//         />
+//         <button type="submit">Add</button>
+//       </form>
+//     );
+//   }
+// }
 
 ContactsForm.propTypes = {
   addContact: PropTypes.func.isRequired,

@@ -18,7 +18,7 @@ import Images from './components/Images/Images';
 function App() {
   return (
     <div className="App">
-      {/* <ContactsPage /> */}
+      <ContactsPage />
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
       <Statistics data={statistics} title="Main Statistics" />
@@ -28,7 +28,7 @@ function App() {
       <Transactions items={transactions} /> */}
       {/* <AccordionItem /> */}
       {/* <Faq data={dataFaq} /> */}
-      <Images />
+      {/* <Images /> */}
     </div>
   );
 }
