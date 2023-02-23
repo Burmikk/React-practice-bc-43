@@ -48,7 +48,9 @@ export const ContactsForm = ({ addContact }) => {
         name="checkbox"
         checked={favorite}
       />
-      <button type="submit">Add</button>
+      <button type="submit" disabled={!name || !number}>
+        Add
+      </button>
     </form>
   );
 };
