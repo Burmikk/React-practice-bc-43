@@ -33,7 +33,7 @@ const Images = () => {
     setPage(prevState => prevState + 1);
   };
 
-  const handleSubmit = search => {
+  const handleSubmit = ({ search }) => {
     setSearch(search);
     setImages([]);
     setPage(1);
