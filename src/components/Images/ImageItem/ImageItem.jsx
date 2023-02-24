@@ -1,35 +1,57 @@
-import { Component } from 'react';
-import { Modal } from '../../../shared/Modal/Modal';
+import { useState } from 'react';
+import Modal from '../../../shared/Modal/Modal';
+const ImageItem = ({ thumbnailUrl, title, url }) => {
+  const [showModal, setShowModal] = useState(false);
 
-class ImageItem extends Component {
-  state = {
-    showModal: false,
+  const onItemClick = () => {
+    setShowModal(prevState => {
+      return !prevState;
+    });
   };
 
-  onItemClick = () => {
-    this.setState(prevState => ({
-      showModal: !prevState.showModal,
-    }));
-  };
+  return (
+    <>
+      <li>
+        <img src={thumbnailUrl} alt={title} onClick={onItemClick} />
+        <p>{title}</p>
+      </li>
+      {showModal && (
+        <Modal onClose={onItemClick}>
+          <img src={url} alt={title} />
+        </Modal>
+      )}
+    </>
+  );
+};
+// class ImageItem extends Component {
+//   state = {
+//     showModal: false,
+//   };
 
-  render() {
-    const { thumbnailUrl, title, url } = this.props;
-    const { showModal } = this.state;
-    const { onItemClick } = this;
-    return (
-      <>
-        <li>
-          <img src={thumbnailUrl} alt={title} onClick={onItemClick} />
-          <p>{title}</p>
-        </li>
-        {showModal && (
-          <Modal closeModal={onItemClick}>
-            <img src={url} alt={title} />
-          </Modal>
-        )}
-      </>
-    );
-  }
-}
+// onItemClick = () => {
+//   this.setState(prevState => ({
+//     showModal: !prevState.showModal,
+//   }));
+// };
+
+//   render() {
+//     const { thumbnailUrl, title, url } = this.props;
+//     const { showModal } = this.state;
+//     const { onItemClick } = this;
+// return (
+//   <>
+//     <li>
+//       <img src={thumbnailUrl} alt={title} onClick={onItemClick} />
+//       <p>{title}</p>
+//     </li>
+//     {showModal && (
+//       <Modal onClose={onItemClick}>
+//         <img src={url} alt={title} />
+//       </Modal>
+//     )}
+//   </>
+// );
+//   }
+// }
 
 export default ImageItem;

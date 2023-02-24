@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './ContactsForm.module.css';
 const INITIAL_STATE = {
   name: '',
@@ -10,6 +10,17 @@ export const ContactsForm = ({ addContact }) => {
   const [state, setState] = useState({
     ...INITIAL_STATE,
   });
+  const inputRef = useRef();
+  const secondRef = useRef();
+  useEffect(() => {
+    if (state.name) {
+      secondRef.current.value = '+380';
+    }
+    inputRef.current.focus();
+
+    console.log(inputRef);
+  }, [state.name]);
+
   const { name, number, favorite } = state;
 
   const handleChangeInput = ({ target }) => {
@@ -32,13 +43,20 @@ export const ContactsForm = ({ addContact }) => {
   return (
     <form onSubmit={handleSubmitForm}>
       <label htmlFor="name">Name:</label>
-      <input onChange={handleChangeInput} id="name" type="text" value={name} />
+      <input
+        onChange={handleChangeInput}
+        id="name"
+        type="text"
+        value={name}
+        ref={inputRef}
+      />
       <label htmlFor="number">Tel:</label>
       <input
         onChange={handleChangeInput}
         id="number"
         type="text"
         value={number}
+        ref={secondRef}
       />
       <label htmlFor="favorite">Add contact to favorite</label>
       <input

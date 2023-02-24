@@ -10,6 +10,7 @@ const Modal = ({ children, onClose }) => {
     return () => {
       document.removeEventListener('keydown', hideModal);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const hideModal = ({ target, currentTarget, code }) => {
