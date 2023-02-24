@@ -11,6 +11,7 @@ import Basket from './components/Basket/Basket';
 import basket from './data/data.basket.json';
 import { ContactsPage } from './components/Contacts/ContactsPage/ContactsPage';
 import { AccordionItem } from './components/AccordionItem/AccordionItem';
+import { Pokemon } from './components/Pokemon/Pokemon';
 import Faq from './components/FAQ/Faq';
 import dataFaq from './data/faq.json';
 import Images from './components/Images/Images';
@@ -19,7 +20,7 @@ import StarWars from './components/StarWars/StarWars';
 function App() {
   return (
     <div className="App">
-      <ContactsPage />
+      {/* <ContactsPage /> */}
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
       <Statistics data={statistics} title="Main Statistics" />
@@ -31,6 +32,7 @@ function App() {
       {/* <Faq data={dataFaq} /> */}
       {/* <StarWars/> */}
       {/* <Images /> */}
+      <Pokemon />
     </div>
   );
 }
