@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
 import { useState, useRef, useEffect } from 'react';
+import useForm from '../../../shared/hooks/useForm';
 import styles from './ContactsForm.module.css';
 const INITIAL_STATE = {
   name: '',
   number: '',
   favorite: false,
 };
-export const ContactsForm = ({ addContact }) => {
-  const [state, setState] = useState({
-    ...INITIAL_STATE,
-  });
+export const ContactsForm = ({ onSubmit }) => {
+  // const [state, setState] = useState({
+  //   ...INITIAL_STATE,
+  // });
+
+  const {handleChangeInput,handleSubmitForm,state}=useForm(INITIAL_STATE,onSubmit);
+
   const inputRef = useRef();
   const secondRef = useRef();
   useEffect(() => {
@@ -23,23 +27,23 @@ export const ContactsForm = ({ addContact }) => {
 
   const { name, number, favorite } = state;
 
-  const handleChangeInput = ({ target }) => {
-    const { id, value, checked, type } = target;
+  // const handleChangeInput = ({ target }) => {
+  //   const { id, value, checked, type } = target;
 
-    setState(prevState => {
-      return { ...prevState, [id]: type === 'checkbox' ? checked : value };
-    });
-  };
+  //   setState(prevState => {
+  //     return { ...prevState, [id]: type === 'checkbox' ? checked : value };
+  //   });
+  // };
 
-  const handleSubmitForm = e => {
-    e.preventDefault();
-    addContact({ ...state });
-    reset();
-  };
+  // const handleSubmitForm = e => {
+  //   e.preventDefault();
+  //   onSubmit({ ...state });
+  //   reset();
+  // };
 
-  const reset = () => {
-    setState({ ...INITIAL_STATE });
-  };
+  // const reset = () => {
+  //   setState({ ...INITIAL_STATE });
+  // };
   return (
     <form onSubmit={handleSubmitForm}>
       <label htmlFor="name">Name:</label>
@@ -116,5 +120,5 @@ export const ContactsForm = ({ addContact }) => {
 // }
 
 ContactsForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

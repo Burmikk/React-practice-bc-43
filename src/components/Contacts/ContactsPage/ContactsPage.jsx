@@ -75,7 +75,7 @@ export const ContactsPage = () => {
 
   return (
     <>
-      <ContactsForm addContact={addContact} />
+      <ContactsForm onSubmit={addContact} />
 
       {contact.length !== 0 && (
         <>

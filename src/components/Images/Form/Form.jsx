@@ -1,33 +1,42 @@
-import { useState } from 'react';
+
 import Button from '../../Button/Button';
+import useForm from '../../../shared/hooks/useForm';
 import PropTypes from 'prop-types';
 const INITIAL_STATE = {
   search: '',
-  name: '',
 };
 const Form = ({ onSubmit }) => {
-  const [state, setState] = useState({
-    ...INITIAL_STATE,
-  });
 
-  const handleChangeInput = ({ target }) => {
-    const { id, value, checked, type } = target;
 
-    setState(prevState => {
-      return { ...prevState, [id]: type === 'checkbox' ? checked : value };
-    });
-  };
 
-  const handleSubmitForm = e => {
-    e.preventDefault();
-    onSubmit({ ...state });
-    reset();
-  };
 
-  const reset = () => {
-    setState({ ...INITIAL_STATE });
-  };
-  const { search, name } = state;
+const {handleChangeInput,handleSubmitForm,state}=useForm(INITIAL_STATE,onSubmit);
+
+
+  // const [state, setState] = useState({
+  //   ...INITIAL_STATE,
+  // });
+
+
+
+  // const handleChangeInput = ({ target }) => {
+  //   const { id, value, checked, type } = target;
+
+  //   setState(prevState => {
+  //     return { ...prevState, [id]: type === 'checkbox' ? checked : value };
+  //   });
+  // };
+
+  // const handleSubmitForm = e => {
+  //   e.preventDefault();
+  //   onSubmit({ ...state });
+  //   reset();
+  // };
+
+  // const reset = () => {
+  //   setState({ ...INITIAL_STATE });
+  // };
+  const { search } = state;
   return (
     <form onSubmit={handleSubmitForm}>
       <Button type="submit" disabled={!search.trim()}>

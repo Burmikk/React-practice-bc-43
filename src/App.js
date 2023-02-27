@@ -20,7 +20,7 @@ import StarWars from './components/StarWars/StarWars';
 function App() {
   return (
     <div className="App">
-      {/* <ContactsPage /> */}
+      <ContactsPage />
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
       <Statistics data={statistics} title="Main Statistics" />
@@ -31,8 +31,8 @@ function App() {
       {/* <AccordionItem /> */}
       {/* <Faq data={dataFaq} /> */}
       {/* <StarWars/> */}
-      {/* <Images /> */}
-      <Pokemon />
+      <Images />
+      {/* <Pokemon /> */}
     </div>
   );
 }
