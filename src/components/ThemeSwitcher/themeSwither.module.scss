@@ -1,0 +1,14 @@
+.box {
+  display: flex;
+}
+
+.theme {
+  width: 30px;
+  display: block;
+  padding: 10px 10px;
+  &Current {
+    composes: theme;
+    font-weight: bold;
+    color: red;
+  }
+}

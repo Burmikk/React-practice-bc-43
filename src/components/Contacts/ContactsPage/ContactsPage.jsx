@@ -14,7 +14,6 @@ export const ContactsPage = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    console.log('Записав');
     localStorage.setItem('contacts', JSON.stringify(contact));
   }, [contact]);
 

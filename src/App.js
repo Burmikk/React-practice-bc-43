@@ -16,10 +16,15 @@ import Faq from './components/FAQ/Faq';
 import dataFaq from './data/faq.json';
 import Images from './components/Images/Images';
 import StarWars from './components/StarWars/StarWars';
+import NavBar from './components/NavBar/NavBar';
+import { ThemeContext } from './Context/ThemeContext';
+import { useContext } from 'react';
 
 function App() {
+  const { state } = useContext(ThemeContext);
   return (
-    <div className="App">
+    <div className={state === 'light' ? 'App' : 'appDark'}>
+      <NavBar />
       <ContactsPage />
       {/* <Basket data={basket} /> */}
       {/* <BlogCard {...article} />
@@ -31,7 +36,7 @@ function App() {
       {/* <AccordionItem /> */}
       {/* <Faq data={dataFaq} /> */}
       {/* <StarWars/> */}
-      <Images />
+      {/* <Images /> */}
       {/* <Pokemon /> */}
     </div>
   );

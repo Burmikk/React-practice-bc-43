@@ -12,7 +12,10 @@ export const ContactsForm = ({ onSubmit }) => {
   //   ...INITIAL_STATE,
   // });
 
-  const {handleChangeInput,handleSubmitForm,state}=useForm(INITIAL_STATE,onSubmit);
+  const { handleChangeInput, handleSubmitForm, state } = useForm(
+    INITIAL_STATE,
+    onSubmit
+  );
 
   const inputRef = useRef();
   const secondRef = useRef();
@@ -21,8 +24,6 @@ export const ContactsForm = ({ onSubmit }) => {
       secondRef.current.value = '+380';
     }
     inputRef.current.focus();
-
-    console.log(inputRef);
   }, [state.name]);
 
   const { name, number, favorite } = state;
