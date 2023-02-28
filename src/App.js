@@ -27,6 +27,7 @@ import ProductsPage from './pages/ProductsPage/ProductsPage.jsx';
 import ProductsPartnersPage from './pages/ProductsPartnersPage/ProductsPartnersPage.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 import { StarWarsPage } from './pages/StarWarsPage/StarWarsPage';
+import { HeroPage } from './pages/HeroPage/HeroPage';
 
 function App() {
   const { state } = useContext(ThemeContext);
@@ -39,7 +40,7 @@ function App() {
         <Route path="/products-partners" element={<ProductsPartnersPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/heroes" element={<StarWarsPage />} />
-        <Route path="/heroes/:id" element={<StarWarsPage />} />
+        <Route path="/heroes/:id" element={<HeroPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <div className={state === 'light' ? 'App' : 'appDark'}>

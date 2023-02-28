@@ -5,3 +5,7 @@ const starWarsInstance = axios.create({
 export const searchPeople = () => {
   return starWarsInstance.get('/people');
 };
+
+export const getSingleHero = id => {
+  return starWarsInstance.get(`/people/${id}`);
+};

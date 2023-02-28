@@ -24,10 +24,10 @@ export const StarWarsPage = () => {
     getFetch();
   }, []);
 
-  const elements = heroesList.map(item => {
+  const elements = heroesList.map((item, index) => {
     return (
       <li key={item}>
-        <Link to={`/heroes/${item}`}>{item}</Link>
+        <Link to={`/heroes/${index + 1}`}>{item}</Link>
       </li>
     );
   });
