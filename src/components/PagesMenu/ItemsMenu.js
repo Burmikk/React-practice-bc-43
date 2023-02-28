@@ -22,6 +22,11 @@ const data = [
     text: 'Contacts',
     link: '/contacts',
   },
+  {
+    id: 5,
+    text: 'Heroes',
+    link: '/heroes',
+  },
 ];
 
 export default data;

@@ -26,17 +26,20 @@ import ContactsPage from './pages/ContactsPage/ContactsPage.jsx';
 import ProductsPage from './pages/ProductsPage/ProductsPage.jsx';
 import ProductsPartnersPage from './pages/ProductsPartnersPage/ProductsPartnersPage.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
+import { StarWarsPage } from './pages/StarWarsPage/StarWarsPage';
 
 function App() {
   const { state } = useContext(ThemeContext);
   return (
     <BrowserRouter>
-      <PagesMenu />
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products-partners" element={<ProductsPartnersPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/heroes" element={<StarWarsPage />} />
+        <Route path="/heroes/:id" element={<StarWarsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <div className={state === 'light' ? 'App' : 'appDark'}>
