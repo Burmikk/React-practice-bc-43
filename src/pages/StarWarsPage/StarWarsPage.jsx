@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { searchPeople } from '../../sevices/starWarsHeroesAPI';
 import Button from '../../components/Button/Button';
+import SearchForm from '../../components/StarWars/SearchForm/SearchForm';
+
 export const StarWarsPage = () => {
   const [heroesList, setHeroesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || 1;
+  const search = searchParams.get('search');
 
   useEffect(() => {
     async function getFetch() {
@@ -14,7 +17,7 @@ export const StarWarsPage = () => {
         setLoading(false);
         const {
           data: { results },
-        } = await searchPeople(page);
+        } = await searchPeople(page, search);
         const arrayWithNames = results.map(item => {
           return item.name;
         });
@@ -28,13 +31,19 @@ export const StarWarsPage = () => {
       }
     }
     getFetch();
-  }, [page]);
+  }, [page, search]);
 
   const loadMore = () => {
     setSearchParams({
+      search,
       page: +page + 1,
     });
   };
+
+  const handleSubmit = ({ search }) => {
+    setSearchParams({ search, page: 1 });
+  };
+
   const elements = heroesList.map((item, index) => {
     return (
       <li key={item}>
@@ -45,6 +54,7 @@ export const StarWarsPage = () => {
 
   return (
     <>
+      <SearchForm onSubmit={handleSubmit} />
       <ul>{elements}</ul>
       {loading ? (
         <Button onBtnClick={loadMore}>Load more</Button>

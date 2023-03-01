@@ -1,31 +1,18 @@
-import { set } from 'date-fns';
-import { useState } from 'react';
+import useForm from '../../../shared/hooks/useForm';
 
 const SearchForm = ({ onSubmit }) => {
-  const [state, setState] = useState({ search: '' });
-
-  const handelChange = e => {
-    const { name, value } = e.target;
-    setState(prevState => {
-      return { ...prevState, [name]: value };
-    });
-  };
-
-  const handelSubmit = e => {
-    e.preventDefault();
-    onSubmit({ ...state });
-    setState({ search: '' });
-  };
+  const {handleChangeInput,handleSubmitForm,state} = useForm({search:''}, onSubmit);
 
   return (
-    <form onSubmit={handelSubmit}>
+    <form onSubmit={handleSubmitForm}>
       <input
         name="search"
-        onChange={handelChange}
+        onChange={handleChangeInput}
         type="text"
         value={state.search}
+        id='search'
       />
-      <button type="submit">Search</button>
+      <button type="submit" disabled={!state.search.trim()}>Search</button>
     </form>
   );
 };
