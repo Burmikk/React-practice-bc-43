@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { searchPeople } from '../../sevices/starWarsHeroesAPI';
 import Button from '../../components/Button/Button';
 import SearchForm from '../../components/StarWars/SearchForm/SearchForm';
@@ -10,6 +10,8 @@ export const StarWarsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || 1;
   const search = searchParams.get('search');
+  const location = useLocation();
+  console.log('🆑  location:', location);
 
   useEffect(() => {
     async function getFetch() {
@@ -42,12 +44,15 @@ export const StarWarsPage = () => {
 
   const handleSubmit = ({ search }) => {
     setSearchParams({ search, page: 1 });
+    setHeroesList([]);
   };
 
   const elements = heroesList.map((item, index) => {
     return (
       <li key={item}>
-        <Link to={`/heroes/${index + 1}`}>{item}</Link>
+        <Link to={`/heroes/${index + 1}`} state={{ from: location }}>
+          {item}
+        </Link>
       </li>
     );
   });

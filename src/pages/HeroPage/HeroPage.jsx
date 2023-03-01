@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { getSingleHero } from '../../sevices/starWarsHeroesAPI';
+import Button from '../../components/Button/Button';
 
 export const HeroPage = () => {
   const [hero, setHero] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log('🆑  location:', location);
 
   useEffect(() => {
     const getHero = async () => {
@@ -15,6 +19,10 @@ export const HeroPage = () => {
     };
     getHero();
   }, [id]);
+
+  const onButtonClick = () => {
+    navigate(-1);
+  };
 
   const {
     name,
@@ -29,6 +37,8 @@ export const HeroPage = () => {
 
   return (
     <div>
+      {/* <Button onBtnClick={onButtonClick}>Go back</Button> */}
+      <Link to={location.state.from || '/'}>Go back</Link>
       <p>Name: {name}</p>
       <p>Height: {height}</p>
       <p>Mass: {mass}</p>
