@@ -1,4 +1,5 @@
 import { ADD_PRODUCT } from './types';
+import { REMOVE_PRODUCT } from './types';
 
 export const addProduct = payload => {
   return {
@@ -6,3 +7,10 @@ export const addProduct = payload => {
     payload,
   };
 };
+
+export const removeProduct = payload => {
+  return {
+    type: REMOVE_PRODUCT,
+    payload,
+  }
+}

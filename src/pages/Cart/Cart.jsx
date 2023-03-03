@@ -1,17 +1,23 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeProduct } from '../../Redux/actions';
 import Button from '../../components/Button/Button';
 
 const Cart = () => {
-  const addedProducts = useSelector(state => {
+  const orderedProducts = useSelector(state => {
     return state.cart;
   });
+  const dispatch = useDispatch();
 
-  const productList = addedProducts.map(({ id, price, title }) => (
+  const handleRemoveBtn = (id) => {
+    dispatch(removeProduct(id));
+  }
+
+  const productList = orderedProducts.map(({ id, price, title }) => (
     <li key={id}>
       <span>
         {title} - {price}
       </span>
-      <Button>Delete</Button>
+      <Button onBtnClick={()=>handleRemoveBtn(id)}>Delete</Button>
     </li>
   ));
 
