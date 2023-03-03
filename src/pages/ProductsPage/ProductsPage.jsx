@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
+import { addProduct } from '../../Redux/actions';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
+
+  const addedProducts = useSelector(state => {
+    return state.cart;
+  });
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -15,12 +21,23 @@ const ProductsPage = () => {
     fetchProducts();
   }, []);
 
+  const dispatch = useDispatch();
+
+  const handleAddBtn = product => {
+    if (addedProducts.find(({ id }) => id === product.id)) {
+      return alert('This product already in bucket!');
+    }
+
+    const action = addProduct(product);
+    dispatch(action);
+  };
+
   const productList = products.map(({ id, price, title }) => (
     <li key={id}>
       <span>
         {title} - {price}
       </span>
-      <Button>Buy</Button>
+      <Button onBtnClick={() => handleAddBtn({ id, price, title })}>Buy</Button>
     </li>
   ));
 
