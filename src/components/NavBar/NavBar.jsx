@@ -1,7 +1,7 @@
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import PagesMenu from '../PagesMenu/PagesMenu';
 import { useSelector } from 'react-redux';
-import { getProductsCount } from '../../Redux/cart/cart-selectors';
+import { getProductsCount } from '../../redux/cart/cart-selectors';
 
 const NavBar = () => {
   const elementsCount = useSelector(getProductsCount);

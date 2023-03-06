@@ -27,9 +27,19 @@ const cartSlise = createSlice({
         return item;
       });
     },
+    decreaseQuantity: (store, { payload }) => {
+      store.map(item => {
+        if (item.id === payload) {
+          item.quantity -= 1;
+          return item;
+        }
+        return item;
+      });
+    },
   },
 });
 
 export default cartSlise.reducer;
 
-export const { addProduct, deleteProduct, addQuantity } = cartSlise.actions;
+export const { addProduct, deleteProduct, addQuantity, decreaseQuantity } =
+  cartSlise.actions;

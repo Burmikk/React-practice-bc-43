@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
-import { addProduct, addQuantity } from '../../Redux/cart/cart-slice';
+import { addProduct, addQuantity } from '../../redux/cart/cart-slice';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
