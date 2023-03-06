@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removeProduct } from '../../Redux/actions';
 import Button from '../../components/Button/Button';
+import { deleteProduct } from '../../redux/cart/cart-slice';
 
 const Cart = () => {
   const orderedProducts = useSelector(state => {
@@ -8,16 +8,16 @@ const Cart = () => {
   });
   const dispatch = useDispatch();
 
-  const handleRemoveBtn = (id) => {
-    dispatch(removeProduct(id));
-  }
+  const handleRemoveBtn = id => {
+    dispatch(deleteProduct(id));
+  };
 
   const productList = orderedProducts.map(({ id, price, title }) => (
     <li key={id}>
       <span>
         {title} - {price}
       </span>
-      <Button onBtnClick={()=>handleRemoveBtn(id)}>Delete</Button>
+      <Button onBtnClick={() => handleRemoveBtn(id)}>Delete</Button>
     </li>
   ));
 
