@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
-import { addProduct } from '../../redux/cart/cart-slice';
+import { addProduct, addQuantity } from '../../Redux/cart/cart-slice';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -25,7 +25,7 @@ const ProductsPage = () => {
 
   const handleAddBtn = product => {
     if (addedProducts.find(({ id }) => id === product.id)) {
-      return alert('This product already in bucket!');
+      return dispatch(addQuantity(product.id));
     }
 
     dispatch(addProduct(product));

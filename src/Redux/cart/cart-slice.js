@@ -4,15 +4,32 @@ const cartSlise = createSlice({
   name: 'cart',
   initialState: [],
   reducers: {
-    addProduct: (state, { payload }) => {
-      return [...state, payload];
+    addProduct: {
+      reducer: (store, { payload }) => {
+        store.push(payload);
+      },
+      prepare: payload => ({
+        payload: {
+          ...payload,
+          quantity: 1,
+        },
+      }),
     },
-    deleteProduct: (state, { payload }) => {
-      return state.filter(({ id }) => id !== payload);
+    deleteProduct: (store, { payload }) => {
+      return store.filter(({ id }) => id !== payload);
+    },
+    addQuantity: (store, { payload }) => {
+      store.map(item => {
+        if (item.id === payload) {
+          item.quantity += 1;
+          return item;
+        }
+        return item;
+      });
     },
   },
 });
 
 export default cartSlise.reducer;
 
-export const { addProduct, deleteProduct } = cartSlise.actions;
+export const { addProduct, deleteProduct, addQuantity } = cartSlise.actions;
