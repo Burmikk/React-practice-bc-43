@@ -7,3 +7,6 @@ const cartInstance = axios.create({
 export const addToCart = data => {
   return cartInstance.post('/', data);
 };
+export const getCart = () => {
+  return cartInstance.get('/');
+};

@@ -2,23 +2,19 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
-import { addToCart } from '../../redux/cart/cart-operations';
+import { addToCart } from '../../Redux/cart/cart-operations';
+import { fetchProducts } from '../../Redux/products/products-operations';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([]);
-
   const addedProducts = useSelector(state => {
     return state.cart;
   });
 
+  const products = useSelector(state => {
+    return state.products.products;
+  });
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const { data } = await getProduct();
-        setProducts(data);
-      } catch (error) {}
-    };
-    fetchProducts();
+    dispatch(fetchProducts());
   }, []);
 
   const dispatch = useDispatch();

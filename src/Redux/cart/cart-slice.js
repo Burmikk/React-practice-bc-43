@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToCart } from './cart-operations';
+import { addToCart, getCart } from './cart-operations';
 
 const cartSlise = createSlice({
   name: 'cart',
@@ -8,29 +8,29 @@ const cartSlise = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    deleteProduct: (store, { payload }) => {
-      return store.filter(({ id }) => id !== payload);
-    },
-    addQuantity: (store, { payload }) => {
-      store.map(item => {
-        if (item.id === payload) {
-          item.quantity += 1;
-          return item;
-        }
-        return item;
-      });
-    },
-    decreaseQuantity: (store, { payload }) => {
-      store.map(item => {
-        if (item.id === payload) {
-          item.quantity -= 1;
-          return item;
-        }
-        return item;
-      });
-    },
-  },
+  // reducers: {
+  //   deleteProduct: (store, { payload }) => {
+  //     return store.filter(({ id }) => id !== payload);
+  //   },
+  //   addQuantity: (store, { payload }) => {
+  //     store.map(item => {
+  //       if (item.id === payload) {
+  //         item.quantity += 1;
+  //         return item;
+  //       }
+  //       return item;
+  //     });
+  //   },
+  //   decreaseQuantity: (store, { payload }) => {
+  //     store.map(item => {
+  //       if (item.id === payload) {
+  //         item.quantity -= 1;
+  //         return item;
+  //       }
+  //       return item;
+  //     });
+  //   },
+  // },
   extraReducers: builder => {
     builder
       .addCase(addToCart.pending, state => {
@@ -43,6 +43,17 @@ const cartSlise = createSlice({
       })
       .addCase(addToCart.rejected, (state, { payload }) => {
         state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(getCart.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getCart.fulfilled, (state, { payload }) => {
+        state.items = payload;
+        state.isLoading = false;
+      })
+      .addCase(getCart.rejected, (state, { payload }) => {
         state.error = payload;
       });
   },
