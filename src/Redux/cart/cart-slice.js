@@ -1,20 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addToCart } from './cart-operations';
 
 const cartSlise = createSlice({
   name: 'cart',
-  initialState: [],
+  initialState: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
   reducers: {
-    addProduct: {
-      reducer: (store, { payload }) => {
-        store.push(payload);
-      },
-      prepare: payload => ({
-        payload: {
-          ...payload,
-          quantity: 1,
-        },
-      }),
-    },
     deleteProduct: (store, { payload }) => {
       return store.filter(({ id }) => id !== payload);
     },
@@ -36,6 +30,21 @@ const cartSlise = createSlice({
         return item;
       });
     },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(addToCart.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addToCart.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.items.push(payload);
+      })
+      .addCase(addToCart.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      });
   },
 });
 

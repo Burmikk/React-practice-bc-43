@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
-import { addProduct, addQuantity } from '../../redux/cart/cart-slice';
+import { addToCart } from '../../redux/cart/cart-operations';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -24,11 +24,11 @@ const ProductsPage = () => {
   const dispatch = useDispatch();
 
   const handleAddBtn = product => {
-    if (addedProducts.find(({ id }) => id === product.id)) {
-      return dispatch(addQuantity(product.id));
-    }
+    // if (addedProducts.find(({ id }) => id === product.id)) {
+    //   return dispatch(addQuantity(product.id));
+    // }
 
-    dispatch(addProduct(product));
+    dispatch(addToCart(product));
   };
 
   const productList = products.map(({ id, price, title }) => (

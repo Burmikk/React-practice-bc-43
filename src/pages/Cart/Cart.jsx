@@ -8,7 +8,7 @@ import {
 
 const Cart = () => {
   const orderedProducts = useSelector(state => {
-    return state.cart;
+    return state.cart.items;
   });
   const dispatch = useDispatch();
 

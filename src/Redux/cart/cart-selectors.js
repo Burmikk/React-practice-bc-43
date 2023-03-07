@@ -1,1 +1,1 @@
-export const getProductsCount = state => state.cart.length;
+export const getProductsCount = state => state.cart.items.length;
