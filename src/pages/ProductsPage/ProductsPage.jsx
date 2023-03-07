@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
-import { addToCart } from '../../Redux/cart/cart-operations';
-import { fetchProducts } from '../../Redux/products/products-operations';
+import { addToCart } from '../../redux/cart/cart-operations';
+import { fetchProducts } from '../../redux/products/products-operations';
 
 const ProductsPage = () => {
   const addedProducts = useSelector(state => {

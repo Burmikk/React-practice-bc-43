@@ -6,7 +6,6 @@ export const getCart = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.getCart();
-      console.log(data);
       return data;
     } catch ({ response }) {
       return rejectWithValue(response);
@@ -31,6 +30,18 @@ export const addToCart = createAsyncThunk(
         return false;
       }
     },
+  }
+);
+
+export const deleteCart = createAsyncThunk(
+  'cart/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await api.deleteCart(id);
+      return id;
+    } catch ({ response }) {
+      return rejectWithValue(response);
+    }
   }
 );
 

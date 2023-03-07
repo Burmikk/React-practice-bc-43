@@ -10,3 +10,7 @@ export const addToCart = data => {
 export const getCart = () => {
   return cartInstance.get('/');
 };
+
+export const deleteCart = id => {
+  return cartInstance.delete(`/${id}`)
+}

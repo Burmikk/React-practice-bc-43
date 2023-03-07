@@ -5,8 +5,9 @@ import {
   deleteProduct,
   addQuantity,
   decreaseQuantity,
-} from '../../Redux/cart/cart-slice';
-import { getCart } from '../../Redux/cart/cart-operations';
+} from '../../redux/cart/cart-slice';
+import { getCart, deleteCart } from '../../redux/cart/cart-operations';
+
 
 const Cart = () => {
   const orderedProducts = useSelector(state => {
@@ -17,8 +18,9 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
+
   const handleRemoveBtn = id => {
-    dispatch(deleteProduct(id));
+    dispatch(deleteCart(id));
   };
 
   const handleIncreaseQuantity = id => {
@@ -40,7 +42,7 @@ const Cart = () => {
       </span>
       {/* <Button onBtnClick={() => handleIncreaseQuantity(id)}>+</Button>
       <Button onBtnClick={() => handleDecreaseQuantity(id, quantity)}>-</Button> */}
-      {/* <Button onBtnClick={() => handleRemoveBtn(id)}>Delete</Button> */}
+     <Button onBtnClick={() => handleRemoveBtn(id)}>Delete</Button>
     </li>
   ));
 
