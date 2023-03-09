@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUp } from './auth-operations';
+import { signUp, logIn, currentUser } from './auth-operations';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -29,7 +29,35 @@ const authSlice = createSlice({
       .addCase(signUp.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-      });
+      })
+      .addCase(logIn.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logIn.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLogin = true;
+      })
+      .addCase(logIn.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(currentUser.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(currentUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLogin = true;
+      })
+      .addCase(currentUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
   },
 });
 

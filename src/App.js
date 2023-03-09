@@ -19,7 +19,7 @@ import Images from './components/Images/Images';
 import StarWars from './components/StarWars/StarWars';
 import NavBar from './components/NavBar/NavBar';
 import { ThemeContext } from './Context/ThemeContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import PagesMenu from './components/PagesMenu/PagesMenu';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import ContactsPage from './pages/ContactsPage/ContactsPage.jsx';
@@ -29,10 +29,19 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 import { StarWarsPage } from './pages/StarWarsPage/StarWarsPage';
 import { HeroPage } from './pages/HeroPage/HeroPage';
 import { SignupPage } from './pages/SignupPage/SignupPage';
+import { LoginPage } from './pages/LoginPage/LoginPage';
 import Cart from './pages/Cart/Cart';
+import { currentUser } from './redux/auth/auth-operations';
+import { useDispatch } from 'react-redux';
 
 function App() {
   const { state } = useContext(ThemeContext);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(currentUser());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <NavBar />
@@ -41,6 +50,7 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage/>}/>
         {/* <Route path="/products-partners" element={<ProductsPartnersPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/heroes" element={<StarWarsPage />} />

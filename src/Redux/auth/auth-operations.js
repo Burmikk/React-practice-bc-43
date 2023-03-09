@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signUpApi } from '../../sevices/AuthAPI';
+import { signUpApi, login, current } from '../../sevices/AuthAPI';
 
 export const signUp = createAsyncThunk(
   'user/signUp',
   async (data, { rejectWithValue }) => {
     try {
-      const { data: result } = await signUpApi(data);
+      const result = await signUpApi(data);
       return result;
     } catch ({ response }) {
       alert(response.data.message);
@@ -13,3 +13,31 @@ export const signUp = createAsyncThunk(
     }
   }
 );
+
+export const logIn = createAsyncThunk('user/logIn',
+async (data, {rejectWithValue}) => {
+  try {
+    const result = await login(data);
+    return result;
+  } catch ({response}) {
+    return rejectWithValue(response.data.message)
+  }
+})
+
+export const currentUser = createAsyncThunk('user/current',
+async (_, {rejectWithValue, getState}) => {
+  try {
+    const {auth} =getState();
+    const data = await current(auth.token);
+    return data;
+  } catch ({response}) {
+    return rejectWithValue(response.data.message)
+  }
+}, {
+  condition: (_, {getState}) => {
+    const {auth} = getState();
+    if(!auth.token) {
+      return false;
+    }
+  }
+})
