@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addToCart, getCart, deleteCart } from './cart-operations';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const cartSlise = createSlice({
   name: 'cart',
@@ -56,22 +58,34 @@ const cartSlise = createSlice({
       .addCase(getCart.rejected, (state, { payload }) => {
         state.error = payload;
       })
-      .addCase(deleteCart.pending, (state) => {
+      .addCase(deleteCart.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteCart.fulfilled, (state, {payload}) => {
+      .addCase(deleteCart.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.items = state.items.filter(({id}) => id !== payload);
+        state.items = state.items.filter(({ id }) => id !== payload);
       })
-      .addCase((deleteCart.rejected, (state, {payload}) => {
-        state.isLoading = false;
-        state.error = payload;
-      }))
+      .addCase(
+        (deleteCart.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        })
+      );
   },
 });
 
-export default cartSlise.reducer;
-
 export const { addProduct, deleteProduct, addQuantity, decreaseQuantity } =
   cartSlise.actions;
+
+const persistConfig = {
+  key: 'cart',
+  storage,
+  whitelist: ['items'],
+};
+
+export const persistedCartReducer = persistReducer(
+  persistConfig,
+  cartSlise.reducer
+);
