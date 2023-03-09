@@ -2,6 +2,7 @@ import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import PagesMenu from '../PagesMenu/PagesMenu';
 import { useSelector } from 'react-redux';
 import { getProductsCount } from '../../redux/cart/cart-selectors';
+import { Auth } from '../Auth/Auth';
 
 const NavBar = () => {
   const elementsCount = useSelector(getProductsCount);
@@ -10,6 +11,8 @@ const NavBar = () => {
     <header>
       <PagesMenu />
       <ThemeSwitcher />
+      <Auth />
+
       <div>
         <p>
           Кількість товарів: <span>{elementsCount}</span>

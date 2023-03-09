@@ -1,9 +1,9 @@
-import{useState} from 'react'
+import { useState } from 'react';
 
-const useForm = (INITIAL_STATE, onSubmit,) => {
-    const [state, setState] = useState({ ...INITIAL_STATE })
-    
-    const handleChangeInput = ({ target }) => {
+const useForm = ({ INITIAL_STATE, onSubmit }) => {
+  const [state, setState] = useState({ ...INITIAL_STATE });
+
+  const handleChangeInput = ({ target }) => {
     const { id, value, checked, type } = target;
 
     setState(prevState => {
@@ -14,10 +14,9 @@ const useForm = (INITIAL_STATE, onSubmit,) => {
   const handleSubmitForm = e => {
     e.preventDefault();
     onSubmit({ ...state });
-     setState({ ...INITIAL_STATE });
+    setState({ ...INITIAL_STATE });
   };
-    
-    return {handleChangeInput,handleSubmitForm,state}
 
-}
-export default useForm
+  return { handleChangeInput, handleSubmitForm, state };
+};
+export default useForm;

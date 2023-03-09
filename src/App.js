@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
 import './App.css';
 import { BlogCard } from './components/BlogCard/BlogCard';
 import { Statistics } from './components/Statistics/Statistics';
@@ -28,6 +28,7 @@ import ProductsPartnersPage from './pages/ProductsPartnersPage/ProductsPartnersP
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 import { StarWarsPage } from './pages/StarWarsPage/StarWarsPage';
 import { HeroPage } from './pages/HeroPage/HeroPage';
+import { SignupPage } from './pages/SignupPage/SignupPage';
 import Cart from './pages/Cart/Cart';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/signup" element={<SignupPage />} />
         {/* <Route path="/products-partners" element={<ProductsPartnersPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/heroes" element={<StarWarsPage />} />
