@@ -33,6 +33,8 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import Cart from './pages/Cart/Cart';
 import { currentUser } from './redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
+import { PublicRoute } from './components/PublicRoute/PublicRoute';
 
 function App() {
   const { state } = useContext(ThemeContext);
@@ -47,10 +49,15 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage/>}/>
+        <Route element={<PrivateRoute />}>
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/cart" element={<Cart />} />
+        </Route>
+        <Route element={<PublicRoute />}>
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+
         {/* <Route path="/products-partners" element={<ProductsPartnersPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/heroes" element={<StarWarsPage />} />

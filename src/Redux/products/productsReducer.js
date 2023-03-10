@@ -4,7 +4,7 @@ import {
   getProductPending,
   getProductRejected,
 } from './actions';
-import { createProduct } from './products-operations';
+import { createProduct, removeProduct } from './products-operations';
 
 const INITIAL_STATE = {
   products: [],
@@ -12,30 +12,39 @@ const INITIAL_STATE = {
   error: null,
 };
 
+const handlePanding = state => {
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleRejected = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+};
+
 export const productsReducer = createReducer(INITIAL_STATE, builder => {
   builder
-    .addCase(getProductPending, state => {
-      state.isLoading = true;
-      state.error = null;
-    })
+    .addCase(getProductPending, handlePanding)
+
     .addCase(getProductFulfiled, (state, { payload }) => {
       state.products = payload;
       state.isLoading = false;
     })
-    .addCase(getProductRejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    })
-    .addCase(createProduct.pending, state => {
-      state.isLoading = true;
-      state.error = null;
-    })
+    .addCase(getProductRejected, handleRejected)
+
+    .addCase(createProduct.pending, handlePanding)
+
     .addCase(createProduct.fulfilled, (state, { payload }) => {
       state.products.push(payload);
       state.isLoading = false;
     })
-    .addCase(createProduct.rejected, (state, { payload }) => {
+    .addCase(createProduct.rejected, handleRejected)
+
+    .addCase(removeProduct.pending, handlePanding)
+
+    .addCase(removeProduct.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload;
-    });
+      state.products = state.products.filter(({ _id }) => _id !== payload);
+    })
+    .addCase(removeProduct.rejected, handleRejected);
 });

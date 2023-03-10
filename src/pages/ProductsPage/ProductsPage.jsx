@@ -6,6 +6,7 @@ import { addToCart } from '../../redux/cart/cart-operations';
 import {
   fetchProducts,
   createProduct,
+  removeProduct,
 } from '../../redux/products/products-operations';
 import { AddProductForm } from '../../components/AddProductForm/AddProductForm';
 
@@ -35,6 +36,10 @@ const ProductsPage = () => {
     dispatch(createProduct(product));
   };
 
+  const handleDeleteProduct = id => {
+    dispatch(removeProduct(id));
+  };
+
   const productList = products.map(({ _id, price, name, description }) => (
     <li key={_id}>
       <span>
@@ -46,6 +51,7 @@ const ProductsPage = () => {
       >
         Buy
       </Button>
+      <Button onBtnClick={() => handleDeleteProduct(_id)}>Delete</Button>
     </li>
   ));
 

@@ -1,4 +1,8 @@
-import { getProduct, addProduct } from '../../sevices/productsApi';
+import {
+  getProduct,
+  addProduct,
+  deleteProduct,
+} from '../../sevices/productsApi';
 import {
   getProductFulfiled,
   getProductPending,
@@ -26,6 +30,18 @@ export const createProduct = createAsyncThunk(
     try {
       const { data } = await addProduct(product);
       return data;
+    } catch ({ response }) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+);
+
+export const removeProduct = createAsyncThunk(
+  'product/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await deleteProduct(id);
+      return id;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
     }
