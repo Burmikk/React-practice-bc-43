@@ -1,7 +1,5 @@
 import axios from 'axios';
+import { authInstance } from './AuthAPI';
 
-const productInstance = axios.create({
-  baseURL: 'https://63f23159aab7d0912503b12f.mockapi.io/products',
-});
-
-export const getProduct = () => productInstance.get('/');
+export const getProduct = () => authInstance.get('/products');
+export const addProduct = product => authInstance.post('/products', product);

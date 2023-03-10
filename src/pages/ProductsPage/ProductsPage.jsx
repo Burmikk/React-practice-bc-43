@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../sevices/productsApi';
 import Button from '../../components/Button/Button';
 import { addToCart } from '../../redux/cart/cart-operations';
-import { fetchProducts } from '../../redux/products/products-operations';
+import {
+  fetchProducts,
+  createProduct,
+} from '../../redux/products/products-operations';
+import { AddProductForm } from '../../components/AddProductForm/AddProductForm';
 
 const ProductsPage = () => {
   const addedProducts = useSelector(state => {
@@ -27,17 +31,27 @@ const ProductsPage = () => {
     dispatch(addToCart(product));
   };
 
-  const productList = products.map(({ id, price, title }) => (
-    <li key={id}>
+  const handleCreateProduct = product => {
+    dispatch(createProduct(product));
+  };
+
+  const productList = products.map(({ _id, price, name, description }) => (
+    <li key={_id}>
       <span>
-        {title} - {price}
+        {name} - {price}
       </span>
-      <Button onBtnClick={() => handleAddBtn({ id, price, title })}>Buy</Button>
+      <p>{description}</p>
+      <Button
+        onBtnClick={() => handleAddBtn({ _id, price, name, description })}
+      >
+        Buy
+      </Button>
     </li>
   ));
 
   return (
     <>
+      <AddProductForm onSubmit={handleCreateProduct} />
       <ul>{productList}</ul>
     </>
   );
